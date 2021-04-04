@@ -1,0 +1,42 @@
+<Configuration status="WARN">
+    <Properties>
+        <Property name="LOG_PATTERN">%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} %X{id}. - %msg%n</Property>
+    </Properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%highlight{${LOG_PATTERN}}"/>
+        </Console>
+        <File name="Marker1" fileName="ErdőMarkerFilter.log" append="false">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <MarkerFilter marker="ERDŐ" onMatch="ACCEPT" onMismatch="DENY"/>
+        </File>
+        <File name="Marker2" fileName="TojásMarkerFilter.log" append="false">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <MarkerFilter marker="TOJÁS" onMatch="ACCEPT" onMismatch="DENY"/>
+        </File>
+        <File name="Marker3" fileName="KérdésMarkerFilter.log" append="false">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <MarkerFilter marker="KÉRDÉS" onMatch="ACCEPT" onMismatch="DENY"/>
+        </File>
+        <File name="Marker4" fileName="NoMarkerFilter.log" append="false">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <NoMarkerFilter onMatch="ACCEPT" onMismatch="DENY"/>
+        </File>
+        <File name="File" fileName="Győrfi_Pál.log" append="false">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <TimeFilter start="20:00:00" end="05:00:00" onMatch="ACCEPT" onMismatch="DENY"/>
+        </File>
+
+
+    </Appenders>
+    <Loggers>
+        <Root level="all">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="Marker1"/>
+            <AppenderRef ref="Marker2"/>
+            <AppenderRef ref="Marker3"/>
+            <AppenderRef ref="Marker4"/>
+            <AppenderRef ref="File"/>
+        </Root>
+    </Loggers>
+</Configuration>
